@@ -1,0 +1,14 @@
+{
+  "name": "phi-platform",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": ["apps/web", "apps/api"],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w @phi/web\" \"npm run dev -w @phi/api\"",
+    "build": "npm run build -w @phi/web",
+    "start": "npm run start -w @phi/api",
+    "migrate": "npm run migrate -w @phi/api",
+    "seed": "npm run seed -w @phi/api"
+  },
+  "devDependencies": { "concurrently": "^9.1.2" }
+}

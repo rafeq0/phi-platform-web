@@ -1,0 +1,70 @@
+
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 mt-24" style="background: #020617;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">
+                            Φ
+                        </div>
+                        <span class="text-xl font-bold gradient-text">Phi Platform</span>
+                    </div>
+                    <p class="text-slate-400 mb-6 leading-relaxed">منصة متكاملة لبيع الحلول البرمجية والخدمات التقنية للشركات والأفراد.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">روابط سريعة</h4>
+                    <div class="space-y-3">
+                        <a onclick="navigateTo('products')" class="footer-link cursor-pointer">المتجر</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">الخدمات</a>
+                        <a onclick="navigateTo('portfolio')" class="footer-link cursor-pointer">الأعمال</a>
+                        <a onclick="navigateTo('blog')" class="footer-link cursor-pointer">المدونة</a>
+                        <a onclick="navigateTo('support')" class="footer-link cursor-pointer">الدعم</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">الخدمات</h4>
+                    <div class="space-y-3">
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">تطوير المواقع</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">تطبيقات الموبايل</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">الأمن السيبراني</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">DevOps</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">تحسين الأداء</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">النشرة البريدية</h4>
+                    <p class="text-slate-400 mb-4">اشترك للحصول على آخر الأخبار والعروض</p>
+                    <form onsubmit="showToast('تم الاشتراك بنجاح!'); event.preventDefault();" class="flex">
+                        <input type="email" placeholder="بريدك الإلكتروني" class="newsletter-input flex-1">
+                        <button type="submit" class="px-4 py-3 rounded-xl rounded-r-none bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg transition-all">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between">
+                <p class="text-slate-500 text-sm">© 2026 Phi Platform. جميع الحقوق محفوظة.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="text-slate-500 hover:text-primary text-sm transition-colors">سياسة الخصوصية</a>
+                    <a href="#" class="text-slate-500 hover:text-primary text-sm transition-colors">شروط الاستخدام</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>

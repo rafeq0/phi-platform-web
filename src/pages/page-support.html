@@ -1,0 +1,187 @@
+<div class="page pt-24" id="page-support">
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 reveal">الدعم الفني</h1>
+                    <p class="text-slate-400 text-lg reveal">نحن هنا لمساعدتك على مدار الساعة</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Support Options -->
+                    <div class="lg:col-span-2">
+                        <div class="glass rounded-2xl p-8 mb-8 reveal">
+                            <h2 class="text-2xl font-bold mb-6">فتح تذكرة دعم</h2>
+                            <form onsubmit="submitTicket(event)">
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">الموضوع *</label>
+                                        <input type="text" required class="form-input w-full rounded-xl py-3 px-4" placeholder="عنوان المشكلة">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">نوع التذكرة *</label>
+                                        <select required class="form-input w-full rounded-xl py-3 px-4">
+                                            <option value="">اختر النوع</option>
+                                            <option value="technical">مشكلة تقنية</option>
+                                            <option value="bug">Bug في النظام</option>
+                                            <option value="feature">طلب ميزة جديدة</option>
+                                            <option value="billing">استفسار مالي</option>
+                                            <option value="other">أخرى</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium mb-2">الوصف التفصيلي *</label>
+                                    <textarea required rows="4" class="form-input w-full rounded-xl py-3 px-4" placeholder="صف المشكلة بالتفصيل..."></textarea>
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium mb-2">الأولوية</label>
+                                    <div class="flex gap-3">
+                                        <label class="cursor-pointer flex-1">
+                                            <input type="radio" name="priority" value="low" class="hidden peer">
+                                            <div class="p-3 rounded-xl border border-slate-700 text-center peer-checked:border-green-500 peer-checked:bg-green-500/10 transition-all">
+                                                <div class="text-green-400 font-medium">عادي</div>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer flex-1">
+                                            <input type="radio" name="priority" value="medium" class="hidden peer" checked>
+                                            <div class="p-3 rounded-xl border border-slate-700 text-center peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all">
+                                                <div class="text-yellow-400 font-medium">متوسط</div>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer flex-1">
+                                            <input type="radio" name="priority" value="high" class="hidden peer">
+                                            <div class="p-3 rounded-xl border border-slate-700 text-center peer-checked:border-red-500 peer-checked:bg-red-500/10 transition-all">
+                                                <div class="text-red-400 font-medium">عاجل</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                    <i class="fas fa-paper-plane ml-2"></i>
+                                    إرسال التذكرة
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Previous Tickets -->
+                        <div class="glass rounded-2xl p-8 reveal">
+                            <h2 class="text-2xl font-bold mb-6">تذاكرك السابقة</h2>
+                            <div class="space-y-4">
+                                <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-3">
+                                            <span class="status-dot status-completed"></span>
+                                            <span class="font-bold">#TKT-2026-001</span>
+                                        </div>
+                                        <span class="badge bg-green-500/20 text-green-400 text-xs">مغلقة</span>
+                                    </div>
+                                    <h4 class="font-medium mb-1">مشكلة في تحميل الصور</h4>
+                                    <p class="text-sm text-slate-400">تم إصلاح مشكلة تحميل الصور في لوحة التحكم</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span><i class="far fa-clock ml-1"></i>منذ 3 أيام</span>
+                                        <span><i class="far fa-comment ml-1"></i>5 ردود</span>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-3">
+                                            <span class="status-dot status-active"></span>
+                                            <span class="font-bold">#TKT-2026-002</span>
+                                        </div>
+                                        <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">قيد المعالجة</span>
+                                    </div>
+                                    <h4 class="font-medium mb-1">طلب إضافة ميزة جديدة</h4>
+                                    <p class="text-sm text-slate-400">طلب إضافة تقارير مبيعات شهرية</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span><i class="far fa-clock ml-1"></i>منذ يوم</span>
+                                        <span><i class="far fa-comment ml-1"></i>2 ردود</span>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-3">
+                                            <span class="status-dot status-pending"></span>
+                                            <span class="font-bold">#TKT-2026-003</span>
+                                        </div>
+                                        <span class="badge bg-primary/20 text-primary text-xs">مفتوحة</span>
+                                    </div>
+                                    <h4 class="font-medium mb-1">استفسار عن التحديث القادم</h4>
+                                    <p class="text-sm text-slate-400">متى سيتم إصدار التحديث الجديد للنظام؟</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span><i class="far fa-clock ml-1"></i>منذ ساعتين</span>
+                                        <span><i class="far fa-comment ml-1"></i>0 ردود</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div>
+                        <div class="glass rounded-2xl p-6 mb-6 reveal">
+                            <h3 class="text-lg font-bold mb-4">معلومات التواصل</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-slate-500">البريد الإلكتروني</div>
+                                        <div class="font-medium">support@phi-platform.com</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-slate-500">الهاتف</div>
+                                        <div class="font-medium">+966 50 000 0000</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-slate-500">ساعات العمل</div>
+                                        <div class="font-medium">24/7 طوال أيام الأسبوع</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-2xl p-6 reveal">
+                            <h3 class="text-lg font-bold mb-4">اشتراكات الدعم</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-xl border border-slate-700 hover:border-primary transition-all cursor-pointer">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-bold">أساسي</span>
+                                        <span class="text-primary font-bold">$99/شهر</span>
+                                    </div>
+                                    <p class="text-sm text-slate-400">5 تذاكر شهرياً، استجابة خلال 24 ساعة</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-primary bg-primary/5 cursor-pointer">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-bold">احترافي</span>
+                                        <span class="text-primary font-bold">$299/شهر</span>
+                                    </div>
+                                    <p class="text-sm text-slate-400">تذاكر غير محدودة، استجابة خلال 4 ساعات</p>
+                                    <span class="badge bg-primary/20 text-primary text-xs mt-2">الأكثر شيوعاً</span>
+                                </div>
+                                <div class="p-4 rounded-xl border border-slate-700 hover:border-primary transition-all cursor-pointer">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-bold">مؤسسي</span>
+                                        <span class="text-primary font-bold">$799/شهر</span>
+                                    </div>
+                                    <p class="text-sm text-slate-400">دعم مخصص، استجابة فورية، مدير حساب</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>

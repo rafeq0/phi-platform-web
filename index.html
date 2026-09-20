@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phi Platform | منصة الحلول البرمجية المتكاملة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="src/js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="src/css/main.css">
+</head>
+<body class="bg-darker">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen" style="background: #020617;">
+        <div class="loading-logo">Phi</div>
+        <div class="loading-bar">
+            <div class="loading-bar-fill"></div>
+        </div>
+        <p class="mt-4 text-slate-400 text-sm">جاري تحميل المنصة...</p>
+    </div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Cursor Follower -->
+    <div class="cursor-follower hidden md:block" id="cursorFollower"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass" id="navbar" style="background: rgba(2, 6, 23, 0.98);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl glow">
+                        Φ
+                    </div>
+                    <span class="text-xl font-bold gradient-text">Phi Platform</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-8">
+                    <a onclick="navigateTo('home')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="home">الرئيسية</a>
+                    <a onclick="navigateTo('products')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="products">المنتجات</a>
+                    <a onclick="navigateTo('services')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="services">الخدمات</a>
+                    <a onclick="navigateTo('portfolio')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="portfolio">الأعمال</a>
+                    <a onclick="navigateTo('blog')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="blog">المدونة</a>
+                    <a onclick="navigateTo('support')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="support">الدعم</a>
+                </div>
+
+                <!-- Actions -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <button onclick="navigateTo('dashboard')" class="relative p-2 text-slate-300 hover:text-white transition-colors">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="notif-badge">3</span>
+                    </button>
+                    <button onclick="navigateTo('dashboard')" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all glow-hover">
+                        <i class="fas fa-user-circle ml-2"></i>
+                        لوحة العميل
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden p-2 text-slate-300" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-y-0 right-0 w-80 bg-darker border-l border-surface z-50 lg:hidden" id="mobileMenu" style="background: #020617;">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">
+                        Φ
+                    </div>
+                    <span class="text-xl font-bold gradient-text">Phi</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="p-2 text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-2">
+                <a onclick="navigateTo('home'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-home ml-3 w-6"></i>الرئيسية
+                </a>
+                <a onclick="navigateTo('products'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-shopping-bag ml-3 w-6"></i>المنتجات
+                </a>
+                <a onclick="navigateTo('services'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-cogs ml-3 w-6"></i>الخدمات
+                </a>
+                <a onclick="navigateTo('request'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-clipboard-list ml-3 w-6"></i>اطلب مشروع
+                </a>
+                <a onclick="navigateTo('portfolio'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-briefcase ml-3 w-6"></i>الأعمال السابقة
+                </a>
+                <a onclick="navigateTo('blog'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-blog ml-3 w-6"></i>المدونة
+                </a>
+                <a onclick="navigateTo('support'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-headset ml-3 w-6"></i>الدعم الفني
+                </a>
+                <a onclick="navigateTo('dashboard'); toggleMobileMenu()" class="block p-4 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 text-primary border border-primary/30">
+                    <i class="fas fa-th-large ml-3 w-6"></i>لوحة العميل
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle text-green-400 text-xl"></i>
+        <span id="toastMessage">تمت العملية بنجاح!</span>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="modal-content" id="modalContent">
+        <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-rocket text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">ابدأ مشروعك الآن</h3>
+            <p class="text-slate-400 mb-6">سنقوم بتحليل متطلباتك وتقديم أفضل الحلول المناسبة لعملك</p>
+            <button onclick="closeModal(); navigateTo('request')" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all">
+                اطلب مشروع مخصص
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== HOME PAGE ==================== -->
+    <div class="page active" id="page-home">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-20 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl float"></div>
+                <div class="absolute bottom-20 left-10 w-80 h-80 bg-secondary/20 rounded-full blur-3xl float" style="animation-delay: 2s;"></div>
+                <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-accent/10 rounded-full blur-3xl float" style="animation-delay: 4s;"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-right">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 reveal">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            منصة الحلول البرمجية المتكاملة
+                        </div>
+
+                        <h1 class="hero-title text-5xl lg:text-7xl font-black mb-6 leading-tight reveal">
+                            نبني <span class="gradient-text typing-cursor" id="typingText">المستقبل</span><br>
+                            <span class="text-slate-400">بالتقنية</span>
+                        </h1>
+
+                        <p class="text-xl text-slate-400 mb-8 leading-relaxed reveal">
+                            حلول برمجية متكاملة للشركات والأفراد. من التصميم إلى التطوير، من البيع إلى الصيانة.
+                            نحول أفكارك إلى واقع رقمي متقدم.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal">
+                            <button onclick="navigateTo('products')" class="px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all glow-hover liquid-btn">
+                                <i class="fas fa-shopping-bag ml-2"></i>
+                                تصفح المنتجات
+                            </button>
+                            <button onclick="openModal()" class="px-8 py-4 rounded-xl border border-slate-700 text-slate-300 font-bold text-lg hover:border-primary hover:text-white transition-all">
+                                <i class="fas fa-play ml-2"></i>
+                                ابدأ مشروعك
+                            </button>
+                        </div>
+
+                        <div class="flex items-center gap-8 mt-12 justify-center lg:justify-start reveal">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold gradient-text animated-counter" data-target="500">0</div>
+                                <div class="text-sm text-slate-500">عميل سعيد</div>
+                            </div>
+                            <div class="w-px h-12 bg-slate-800"></div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold gradient-text animated-counter" data-target="1200">0</div>
+                                <div class="text-sm text-slate-500">مشروع منجز</div>
+                            </div>
+                            <div class="w-px h-12 bg-slate-800"></div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold gradient-text animated-counter" data-target="99">0</div>
+                                <div class="text-sm text-slate-500">% رضا العملاء</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative hidden lg:block">
+                        <div class="code-block float">
+                            <div class="flex items-center gap-2 mb-4 relative z-10">
+                                <span class="code-dot red"></span>
+                                <span class="code-dot yellow"></span>
+                                <span class="code-dot green"></span>
+                                <span class="text-slate-500 text-xs mr-4">phi-platform.js</span>
+                            </div>
+                            <div class="relative z-10 text-right" dir="ltr">
+                                <div><span class="code-comment">// Phi Platform - Build the Future</span></div>
+                                <div class="mt-2"><span class="code-keyword">import</span> { <span class="code-function">Innovation</span>, <span class="code-function">Excellence</span> } <span class="code-keyword">from</span> <span class="code-string">'@phi/core'</span>;</div>
+                                <div class="mt-2"><span class="code-keyword">const</span> <span class="code-function">platform</span> = <span class="code-keyword">new</span> <span class="code-function">PhiPlatform</span>({</div>
+                                <div class="mr-4"><span class="code-function">vision</span>: <span class="code-string">'Transform Ideas'</span>,</div>
+                                <div class="mr-4"><span class="code-function">power</span>: <span class="code-string">'Cutting Edge Tech'</span>,</div>
+                                <div class="mr-4"><span class="code-function">clients</span>: <span class="code-number">500</span>,</div>
+                                <div class="mr-4"><span class="code-function">success</span>: <span class="code-number">99.9</span></div>
+                                <div>});</div>
+                                <div class="mt-2"><span class="code-function">platform</span>.<span class="code-function">launch</span>().<span class="code-function">then</span>(() => {</div>
+                                <div class="mr-4"><span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'Success! 🚀'</span>);</div>
+                                <div>});</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div class="absolute -top-10 -right-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/30 to-secondary/30 border border-primary/30 flex items-center justify-center float" style="animation-delay: 1s;">
+                            <i class="fas fa-code text-primary text-2xl"></i>
+                        </div>
+                        <div class="absolute -bottom-5 -left-5 w-16 h-16 rounded-xl bg-gradient-to-br from-accent/30 to-primary/30 border border-accent/30 flex items-center justify-center float" style="animation-delay: 3s;">
+                            <i class="fas fa-shield-alt text-accent text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden lg:block">
+                    <div class="scroll-indicator"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-4xl lg:text-5xl font-bold mb-4 reveal">ماذا نقدم لك؟</h2>
+                    <p class="text-slate-400 text-lg max-w-2xl mx-auto reveal">حلول تقنية شاملة تغطي كل احتياجاتك الرقمية من الألف إلى الياء</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service 1 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-shopping-cart text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">متجر المنتجات البرمجية</h3>
+                        <p class="text-slate-400 leading-relaxed">مواقع جاهزة، أنظمة إدارة، تطبيقات موبايل، قوالب SaaS، أدوات أتمتة، وAPIs جاهزة للشراء الفوري.</p>
+                        <button onclick="navigateTo('products')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            تصفح المتجر <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-project-diagram text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">مشاريع مخصصة</h3>
+                        <p class="text-slate-400 leading-relaxed">مواقع خاصة، تطبيقات مخصصة، أنظمة ERP، منصات حجز، متاجر إلكترونية، وحلول SaaS مبتكرة.</p>
+                        <button onclick="navigateTo('request')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            اطلب مشروع <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-tools text-accent"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">خدمات تقنية مستمرة</h3>
+                        <p class="text-slate-400 leading-relaxed">صيانة مواقع، إصلاح bugs، تحسين السرعة، تحديث الأنظمة، refactoring، وخدمات DevOps احترافية.</p>
+                        <button onclick="navigateTo('services')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            اكتشف الخدمات <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-shield-alt text-red-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">الأمن السيبراني</h3>
+                        <p class="text-slate-400 leading-relaxed">فحص ثغرات، حماية المواقع، Hardening، إعداد SSL/Cloudflare، استعادة اختراقات، وتقارير أمنية شاملة.</p>
+                        <button onclick="navigateTo('services')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            حماية موقعك <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-chart-line text-green-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">النمو والتحسين</h3>
+                        <p class="text-slate-400 leading-relaxed">تحسين SEO، تحسين معدل التحويل، إعادة تصميم UI/UX، تحليلات متقدمة، وتحسين قمع المبيعات.</p>
+                        <button onclick="navigateTo('services')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            نمو أعمالك <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-headset text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">الدعم الفني 24/7</h3>
+                        <p class="text-slate-400 leading-relaxed">نظام تذاكر متكامل، استجابة سريعة، فريق دعم متخصص، واشتراكات صيانة مرنة تناسب كل احتياج.</p>
+                        <button onclick="navigateTo('support')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            احصل على دعم <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="py-24 relative overflow-hidden">
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-4 reveal">كيف نعمل؟</h2>
+                    <p class="text-slate-400 text-lg max-w-2xl mx-auto reveal">عملية منظمة وشفافة من البداية إلى النهاية</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center reveal">
+                        <div class="process-step-number mx-auto mb-4">1</div>
+                        <h3 class="text-lg font-bold mb-2">التحليل</h3>
+                        <p class="text-slate-400 text-sm">نفهم احتياجاتك بدقة ونحلل المتطلبات التقنية</p>
+                    </div>
+                    <div class="text-center reveal">
+                        <div class="process-step-number mx-auto mb-4">2</div>
+                        <h3 class="text-lg font-bold mb-2">التصميم</h3>
+                        <p class="text-slate-400 text-sm">نصمم واجهات مستخدم حديثة وتجربة سلسة</p>
+                    </div>
+                    <div class="text-center reveal">
+                        <div class="process-step-number mx-auto mb-4">3</div>
+                        <h3 class="text-lg font-bold mb-2">التطوير</h3>
+                        <p class="text-slate-400 text-sm">نبني الحلول بأحدث التقنيات وأفضل الممارسات</p>
+                    </div>
+                    <div class="text-center reveal">
+                        <div class="process-step-number mx-auto mb-4">4</div>
+                        <h3 class="text-lg font-bold mb-2">الإطلاق</h3>
+                        <p class="text-slate-400 text-sm">نطلق مشروعك مع دعم مستمر وصيانة دورية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                    <div>
+                        <h2 class="text-4xl font-bold mb-2 reveal">منتجات مميزة</h2>
+                        <p class="text-slate-400 reveal">حلول جاهزة للاستخدام الفوري</p>
+                    </div>
+                    <button onclick="navigateTo('products')" class="mt-4 md:mt-0 px-6 py-3 rounded-xl border border-primary/30 text-primary hover:bg-primary/10 transition-all reveal">
+                        عرض الكل <i class="fas fa-arrow-left mr-2"></i>
+                    </button>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card rounded-2xl overflow-hidden reveal tilt-card">
+                        <div class="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center relative overflow-hidden">
+                            <i class="fas fa-store text-6xl text-primary/30"></i>
+                            <div class="absolute top-4 right-4 badge bg-green-500/20 text-green-400 border border-green-500/30">جديد</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2">متجر إلكتروني متكامل</h3>
+                            <p class="text-slate-400 text-sm mb-4">منصة تجارة إلكترونية مع إدارة منتجات، طلبات، دفع، وشحن</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$499</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal tilt-card">
+                        <div class="h-48 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center relative overflow-hidden">
+                            <i class="fas fa-building text-6xl text-secondary/30"></i>
+                            <div class="absolute top-4 right-4 badge bg-primary/20 text-primary border border-primary/30">الأكثر مبيعاً</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2">نظام ERP متكامل</h3>
+                            <p class="text-slate-400 text-sm mb-4">إدارة موارد المؤسسات مع HR، مالية، مخزون، وCRM</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$999</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal tilt-card">
+                        <div class="h-48 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center relative overflow-hidden">
+                            <i class="fas fa-mobile-alt text-6xl text-accent/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2">تطبيق موبايل Flutter</h3>
+                            <p class="text-slate-400 text-sm mb-4">تطبيق جوال احترافي لـ iOS وAndroid مع لوحة تحكم</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$799</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-24 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4 reveal">آراء عملائنا</h2>
+                    <p class="text-slate-400 reveal">ثقة بنيتها على نتائج ملموسة</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass-card rounded-2xl p-8 testimonial-card reveal">
+                        <div class="star-rating mb-4">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p class="text-slate-300 mb-6 leading-relaxed">"فريق Phi Platform قدم لنا حلاً تقنياً متكاملاً غيّر طريقة عملنا بالكامل. الجودة والسرعة في التنفيذ كانت مذهلة."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">أ</div>
+                            <div>
+                                <div class="font-bold">أحمد الشمري</div>
+                                <div class="text-sm text-slate-500">CEO - شركة التقنية المتقدمة</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-8 testimonial-card reveal">
+                        <div class="star-rating mb-4">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p class="text-slate-300 mb-6 leading-relaxed">"الدعم الفني المستمر والصيانة الدورية جعلتنا نركز على عملنا بدون قلق تقني. أفضل شريك تقني يمكن الاعتماد عليه."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-white font-bold">س</div>
+                            <div>
+                                <div class="font-bold">سارة العتيبي</div>
+                                <div class="text-sm text-slate-500">مديرة التسويق - مؤسسة النور</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-8 testimonial-card reveal">
+                        <div class="star-rating mb-4">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p class="text-slate-300 mb-6 leading-relaxed">"خدمات الأمن السيبراني أنقذت موقعنا من تهديد خطير. الاحترافية والسرعة في الاستجابة تجعلهم الأفضل في المجال."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white font-bold">م</div>
+                            <div>
+                                <div class="font-bold">محمد القحطاني</div>
+                                <div class="text-sm text-slate-500">CTO - منصة التجارة الإلكترونية</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="glass rounded-3xl p-12 text-center relative overflow-hidden reveal" style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(99, 102, 241, 0.2);">
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">جاهز لتحويل فكرتك إلى واقع؟</h2>
+                        <p class="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">انضم إلى مئات العملاء الذين يثقون بنا لبناء مستقبلهم الرقمي. ابدأ مشروعك اليوم واحصل على استشارة مجانية.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="navigateTo('request')" class="px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all liquid-btn">
+                                <i class="fas fa-paper-plane ml-2"></i>
+                                اطلب مشروعك الآن
+                            </button>
+                            <button onclick="showToast('سيتم التواصل معك قريباً')" class="px-8 py-4 rounded-xl border border-slate-600 text-slate-300 font-bold text-lg hover:border-primary hover:text-white transition-all">
+                                <i class="fas fa-phone ml-2"></i>
+                                تحدث مع خبير
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<div class="page pt-24" id="page-products">
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 reveal">متجر المنتجات البرمجية</h1>
+                    <p class="text-slate-400 text-lg reveal">حلول جاهزة للاستخدام الفوري بجودة عالية</p>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-3 justify-center mb-12 reveal">
+                    <button class="filter-chip active" onclick="filterProducts('all', this)">الكل</button>
+                    <button class="filter-chip" onclick="filterProducts('websites', this)">مواقع</button>
+                    <button class="filter-chip" onclick="filterProducts('apps', this)">تطبيقات</button>
+                    <button class="filter-chip" onclick="filterProducts('systems', this)">أنظمة</button>
+                    <button class="filter-chip" onclick="filterProducts('templates', this)">قوالب</button>
+                    <button class="filter-chip" onclick="filterProducts('tools', this)">أدوات</button>
+                </div>
+
+                <!-- Search -->
+                <div class="max-w-xl mx-auto mb-12 reveal">
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="ابحث عن منتج..." class="form-input w-full rounded-xl py-3 px-4" onkeyup="searchProducts(this.value)">
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="productsGrid">
+                    <div class="glass-card rounded-2xl overflow-hidden reveal product-item" data-category="websites">
+                        <div class="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                            <i class="fas fa-store text-6xl text-primary/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="badge bg-primary/20 text-primary text-xs">موقع</span>
+                                <span class="badge bg-green-500/20 text-green-400 text-xs">جديد</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">متجر إلكتروني متكامل</h3>
+                            <p class="text-slate-400 text-sm mb-4">منصة تجارة إلكترونية مع إدارة منتجات، طلبات، دفع، وشحن</p>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="star-rating text-sm">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                                <span class="text-sm text-slate-500">(24)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$499</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary text-white hover:bg-secondary transition-all">
+                                    <i class="fas fa-cart-plus ml-1"></i> شراء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal product-item" data-category="systems">
+                        <div class="h-48 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center">
+                            <i class="fas fa-building text-6xl text-secondary/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="badge bg-secondary/20 text-secondary text-xs">نظام</span>
+                                <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">الأكثر مبيعاً</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">نظام ERP متكامل</h3>
+                            <p class="text-slate-400 text-sm mb-4">إدارة موارد المؤسسات مع HR، مالية، مخزون، وCRM</p>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="star-rating text-sm">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                                <span class="text-sm text-slate-500">(56)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$999</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary text-white hover:bg-secondary transition-all">
+                                    <i class="fas fa-cart-plus ml-1"></i> شراء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal product-item" data-category="apps">
+                        <div class="h-48 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-6xl text-accent/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="badge bg-accent/20 text-accent text-xs">تطبيق</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">تطبيق موبايل Flutter</h3>
+                            <p class="text-slate-400 text-sm mb-4">تطبيق جوال احترافي لـ iOS وAndroid مع لوحة تحكم</p>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="star-rating text-sm">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star-half-alt star"></i>
+                                </div>
+                                <span class="text-sm text-slate-500">(18)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$799</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary text-white hover:bg-secondary transition-all">
+                                    <i class="fas fa-cart-plus ml-1"></i> شراء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal product-item" data-category="templates">
+                        <div class="h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                            <i class="fas fa-layer-group text-6xl text-purple-500/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="badge bg-purple-500/20 text-purple-400 text-xs">قالب</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">قالب SaaS Dashboard</h3>
+                            <p class="text-slate-400 text-sm mb-4">لوحة تحكم احترافية مع رسوم بيانية وجداول متقدمة</p>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="star-rating text-sm">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                                <span class="text-sm text-slate-500">(42)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$199</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary text-white hover:bg-secondary transition-all">
+                                    <i class="fas fa-cart-plus ml-1"></i> شراء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal product-item" data-category="tools">
+                        <div class="h-48 bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center">
+                            <i class="fas fa-robot text-6xl text-orange-500/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="badge bg-orange-500/20 text-orange-400 text-xs">أداة</span>
+                                <span class="badge bg-green-500/20 text-green-400 text-xs">جديد</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">Bot أتمتة ذكي</h3>
+                            <p class="text-slate-400 text-sm mb-4">روبوت أتمتة مع ذكاء اصطناعي لتنفيذ المهام تلقائياً</p>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="star-rating text-sm">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                                <span class="text-sm text-slate-500">(31)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$349</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary text-white hover:bg-secondary transition-all">
+                                    <i class="fas fa-cart-plus ml-1"></i> شراء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal product-item" data-category="websites">
+                        <div class="h-48 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 flex items-center justify-center">
+                            <i class="fas fa-calendar-check text-6xl text-teal-500/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="badge bg-teal-500/20 text-teal-400 text-xs">موقع</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">منصة حجوزات متكاملة</h3>
+                            <p class="text-slate-400 text-sm mb-4">نظام حجوزات مع تقويم، دفع، إشعارات، وتقارير</p>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="star-rating text-sm">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star-half-alt star"></i>
+                                </div>
+                                <span class="text-sm text-slate-500">(15)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$599</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary text-white hover:bg-secondary transition-all">
+                                    <i class="fas fa-cart-plus ml-1"></i> شراء
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<div class="page pt-24" id="page-services">
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 reveal">خدماتنا التقنية</h1>
+                    <p class="text-slate-400 text-lg reveal">حلول احترافية لكل مرحلة من مراحل مشروعك</p>
+                </div>
+
+                <!-- Service Categories Tabs -->
+                <div class="flex flex-wrap gap-2 justify-center mb-12 reveal">
+                    <button class="tab-btn active" onclick="switchServiceTab('maintenance', this)">
+                        <i class="fas fa-tools ml-2"></i>صيانة وتطوير
+                    </button>
+                    <button class="tab-btn" onclick="switchServiceTab('security', this)">
+                        <i class="fas fa-shield-alt ml-2"></i>أمن سيبراني
+                    </button>
+                    <button class="tab-btn" onclick="switchServiceTab('growth', this)">
+                        <i class="fas fa-chart-line ml-2"></i>نمو وتحسين
+                    </button>
+                </div>
+
+                <!-- Maintenance Services -->
+                <div class="service-tab-content" id="tab-maintenance">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-bug text-red-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">إصلاح Bugs</h3>
+                            <p class="text-slate-400 mb-6">اكتشاف وإصلاح الأخطاء البرمجية بسرعة وكفاءة</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$50</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/bug</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-tachometer-alt text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">تحسين السرعة</h3>
+                            <p class="text-slate-400 mb-6">تحسين أداء الموقع وتقليل وقت التحميل بشكل ملحوظ</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$150</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/مشروع</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-sync-alt text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">تحديث الأنظمة</h3>
+                            <p class="text-slate-400 mb-6">تحديث الإصدارات والمكتبات مع ضمان التوافق</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$200</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/شهر</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-code text-secondary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Refactoring</h3>
+                            <p class="text-slate-400 mb-6">إعادة هيكلة الكود لتحسين الأداء والصيانة</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$300</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/مشروع</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-server text-green-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">نقل السيرفرات</h3>
+                            <p class="text-slate-400 mb-6">نقل البيانات والتطبيقات بين السيرفرات بدون توقف</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$250</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/عملية</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-infinity text-yellow-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">DevOps</h3>
+                            <p class="text-slate-400 mb-6">إعداد CI/CD، Docker، Kubernetes، وإدارة البنية التحتية</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$500</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/شهر</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Services -->
+                <div class="service-tab-content hidden" id="tab-security">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-search text-red-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">فحص ثغرات</h3>
+                            <p class="text-slate-400 mb-6">فحص شامل للثغرات الأمنية مع تقرير تفصيلي</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$200</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/فحص</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-shield-alt text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">حماية المواقع</h3>
+                            <p class="text-slate-400 mb-6">حماية شاملة ضد الهجمات والاختراقات</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$300</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/شهر</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-lock text-secondary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Hardening</h3>
+                            <p class="text-slate-400 mb-6">تقوية إعدادات السيرفر والتطبيقات أمنياً</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$400</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/سيرفر</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-certificate text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">SSL / Cloudflare</h3>
+                            <p class="text-slate-400 mb-6">إعداد شهادات SSL وإعداد Cloudflare بشكل احترافي</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$100</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/إعداد</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-first-aid text-red-500"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">استعادة اختراقات</h3>
+                            <p class="text-slate-400 mb-6">تنظيف الموقع المخترق واستعادة البيانات</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$500</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/حالة</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-file-alt text-yellow-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">تقارير أمنية</h3>
+                            <p class="text-slate-400 mb-6">تقارير أمنية دورية مع توصيات وخطة عمل</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$150</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/تقرير</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growth Services -->
+                <div class="service-tab-content hidden" id="tab-growth">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-search text-green-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">تحسين SEO</h3>
+                            <p class="text-slate-400 mb-6">تحسين محركات البحث لزيادة الظهور والزيارات</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$250</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/شهر</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-percentage text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">تحسين Conversion</h3>
+                            <p class="text-slate-400 mb-6">زيادة معدل التحويل وتحسين تجربة المستخدم</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$350</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/مشروع</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-paint-brush text-secondary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">UI/UX Redesign</h3>
+                            <p class="text-slate-400 mb-6">إعادة تصميم الواجهات لتحسين التجربة والمظهر</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$500</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/مشروع</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-chart-bar text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Analytics متقدم</h3>
+                            <p class="text-slate-400 mb-6">إعداد تحليلات متقدمة ولوحات معلومات مخصصة</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$200</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/إعداد</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-8 reveal price-card">
+                            <div class="service-icon mb-6">
+                                <i class="fas fa-filter text-purple-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Funnel Optimization</h3>
+                            <p class="text-slate-400 mb-6">تحسين قمع المبيعات لزيادة الإيرادات</p>
+                            <div class="flex items-end justify-between mb-6">
+                                <div>
+                                    <span class="text-sm text-slate-500">يبدأ من</span>
+                                    <div class="text-3xl font-bold gradient-text">$400</div>
+                                </div>
+                                <span class="text-sm text-slate-500">/شهر</span>
+                            </div>
+                            <button onclick="showToast('تم إرسال طلبك، سنتواصل معك قريباً')" class="w-full py-3 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-semibold">
+                                اطلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<div class="page pt-24" id="page-request">
+        <section class="py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 reveal">اطلب مشروعك المخصص</h1>
+                    <p class="text-slate-400 text-lg reveal">أخبرنا عن مشروعك وسنقوم بتحليله وتقديم عرض مناسب</p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 lg:p-12 reveal">
+                    <form onsubmit="submitProjectRequest(event)">
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">الاسم الكامل *</label>
+                                <input type="text" required class="form-input w-full rounded-xl py-3 px-4" placeholder="أحمد محمد">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">البريد الإلكتروني *</label>
+                                <input type="email" required class="form-input w-full rounded-xl py-3 px-4" placeholder="ahmed@example.com">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">رقم الجوال</label>
+                                <input type="tel" class="form-input w-full rounded-xl py-3 px-4" placeholder="+966 50 000 0000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">نوع المشروع *</label>
+                                <select required class="form-input w-full rounded-xl py-3 px-4">
+                                    <option value="">اختر نوع المشروع</option>
+                                    <option value="website">موقع إلكتروني</option>
+                                    <option value="app">تطبيق موبايل</option>
+                                    <option value="erp">نظام ERP</option>
+                                    <option value="ecommerce">متجر إلكتروني</option>
+                                    <option value="booking">منصة حجز</option>
+                                    <option value="saas">SaaS Startup</option>
+                                    <option value="other">أخرى</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">الميزانية المتوقعة</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="budget" value="1000-5000" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">$1,000 - $5,000</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="budget" value="5000-10000" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">$5,000 - $10,000</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="budget" value="10000-50000" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">$10,000 - $50,000</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="budget" value="50000+" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">$50,000+</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">المدة المتوقعة</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="1-2weeks" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">1-2 أسابيع</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="1month" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">شهر</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="2-3months" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">2-3 أشهر</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="3months+" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">3+ أشهر</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">وصف المشروع *</label>
+                            <textarea required rows="6" class="form-input w-full rounded-xl py-3 px-4" placeholder="صف مشروعك بالتفصيل... ما هي المشكلة التي يحلها؟ من هم المستخدمون المستهدفون؟ ما هي الميزات الأساسية؟"></textarea>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">الملفات المرفقة (اختياري)</label>
+                            <div class="border-2 border-dashed border-slate-700 rounded-xl p-8 text-center hover:border-primary transition-all cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-slate-500 mb-4"></i>
+                                <p class="text-slate-400">اسحب الملفات هنا أو اضغط للاختيار</p>
+                                <p class="text-sm text-slate-600 mt-2">PDF, DOC, PNG, JPG (Max 10MB)</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all liquid-btn">
+                            <i class="fas fa-paper-plane ml-2"></i>
+                            إرسال الطلب
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+<div class="page pt-24" id="page-portfolio">
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 reveal">أعمالنا السابقة</h1>
+                    <p class="text-slate-400 text-lg reveal">نماذج من مشاريعنا التي نفخر بها</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                        <div class="h-64 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center">
+                                <i class="fas fa-shopping-bag text-8xl text-white/20 group-hover:scale-110 transition-transform duration-500"></i>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div>
+                                    <span class="badge bg-primary/30 text-primary border border-primary/30 mb-2">متجر إلكتروني</span>
+                                    <h3 class="text-xl font-bold">متجر الأناقة</h3>
+                                    <p class="text-slate-400 text-sm">منصة تجارة إلكترونية متكاملة</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge bg-green-500/20 text-green-400 text-xs">مكتمل</span>
+                                    <span class="text-sm text-slate-500">2 أشهر</span>
+                                </div>
+                                <button class="text-primary hover:text-secondary transition-colors">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                        <div class="h-64 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-secondary/30 to-accent/30 flex items-center justify-center">
+                                <i class="fas fa-hospital text-8xl text-white/20 group-hover:scale-110 transition-transform duration-500"></i>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div>
+                                    <span class="badge bg-secondary/30 text-secondary border border-secondary/30 mb-2">نظام ERP</span>
+                                    <h3 class="text-xl font-bold">نظام المستشفى الذكي</h3>
+                                    <p class="text-slate-400 text-sm">إدارة موارد طبية متكاملة</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge bg-green-500/20 text-green-400 text-xs">مكتمل</span>
+                                    <span class="text-sm text-slate-500">4 أشهر</span>
+                                </div>
+                                <button class="text-primary hover:text-secondary transition-colors">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                        <div class="h-64 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-accent/30 to-primary/30 flex items-center justify-center">
+                                <i class="fas fa-utensils text-8xl text-white/20 group-hover:scale-110 transition-transform duration-500"></i>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div>
+                                    <span class="badge bg-accent/30 text-accent border border-accent/30 mb-2">تطبيق موبايل</span>
+                                    <h3 class="text-xl font-bold">تطبيق توصيل الطعام</h3>
+                                    <p class="text-slate-400 text-sm">تطبيق iOS وAndroid</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge bg-green-500/20 text-green-400 text-xs">مكتمل</span>
+                                    <span class="text-sm text-slate-500">3 أشهر</span>
+                                </div>
+                                <button class="text-primary hover:text-secondary transition-colors">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                        <div class="h-64 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/30 flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-8xl text-white/20 group-hover:scale-110 transition-transform duration-500"></i>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div>
+                                    <span class="badge bg-purple-500/30 text-purple-400 border border-purple-500/30 mb-2">منصة تعليمية</span>
+                                    <h3 class="text-xl font-bold">منصة التعلم الذكي</h3>
+                                    <p class="text-slate-400 text-sm">منصة تعليمية مع فيديو واختبارات</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">قيد التنفيذ</span>
+                                    <span class="text-sm text-slate-500">5 أشهر</span>
+                                </div>
+                                <button class="text-primary hover:text-secondary transition-colors">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                        <div class="h-64 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-orange-500/30 to-red-500/30 flex items-center justify-center">
+                                <i class="fas fa-car text-8xl text-white/20 group-hover:scale-110 transition-transform duration-500"></i>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div>
+                                    <span class="badge bg-orange-500/30 text-orange-400 border border-orange-500/30 mb-2">منصة حجز</span>
+                                    <h3 class="text-xl font-bold">منصة تأجير السيارات</h3>
+                                    <p class="text-slate-400 text-sm">حجز وتأجير مع خريطة ودفع</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge bg-green-500/20 text-green-400 text-xs">مكتمل</span>
+                                    <span class="text-sm text-slate-500">3 أشهر</span>
+                                </div>
+                                <button class="text-primary hover:text-secondary transition-colors">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal group">
+                        <div class="h-64 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-teal-500/30 to-cyan-500/30 flex items-center justify-center">
+                                <i class="fas fa-wallet text-8xl text-white/20 group-hover:scale-110 transition-transform duration-500"></i>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div>
+                                    <span class="badge bg-teal-500/30 text-teal-400 border border-teal-500/30 mb-2">Fintech</span>
+                                    <h3 class="text-xl font-bold">محفظة رقمية</h3>
+                                    <p class="text-slate-400 text-sm">تطبيق دفع إلكتروني مع محفظة</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">قيد التنفيذ</span>
+                                    <span class="text-sm text-slate-500">6 أشهر</span>
+                                </div>
+                                <button class="text-primary hover:text-secondary transition-colors">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<div class="page pt-24" id="page-blog">
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 reveal">المدونة</h1>
+                    <p class="text-slate-400 text-lg reveal">مقالات تقنية ونصائح احترافية</p>
+                </div>
+
+                <!-- Featured Post -->
+                <div class="glass-card rounded-2xl overflow-hidden mb-12 reveal blog-card">
+                    <div class="grid lg:grid-cols-2">
+                        <div class="h-64 lg:h-auto bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                            <i class="fas fa-rocket text-9xl text-primary/20"></i>
+                        </div>
+                        <div class="p-8 lg:p-12 flex flex-col justify-center">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="badge bg-primary/20 text-primary">تقنية</span>
+                                <span class="text-sm text-slate-500">12 مايو 2026</span>
+                            </div>
+                            <h2 class="text-2xl lg:text-3xl font-bold mb-4">مستقبل تطوير البرمجيات في عصر الذكاء الاصطناعي</h2>
+                            <p class="text-slate-400 mb-6 leading-relaxed">كيف يغير الذكاء الاصطناعي طريقة بناء البرمجيات؟ من الأدوات المساعدة إلى الكود التلقائي، استكشف التحول الكبير في صناعة التقنية...</p>
+                            <button class="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card rounded-2xl overflow-hidden reveal blog-card">
+                        <div class="h-48 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-6xl text-secondary/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="badge bg-red-500/20 text-red-400 text-xs">أمن</span>
+                                <span class="text-xs text-slate-500">10 مايو 2026</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">أفضل 10 ممارسات لحماية تطبيقات الويب</h3>
+                            <p class="text-slate-400 text-sm mb-4">دليل شامل لحماية تطبيقاتك من أحدث التهديدات السيبرانية...</p>
+                            <button class="text-primary text-sm font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal blog-card">
+                        <div class="h-48 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
+                            <i class="fas fa-tachometer-alt text-6xl text-accent/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="badge bg-green-500/20 text-green-400 text-xs">أداء</span>
+                                <span class="text-xs text-slate-500">8 مايو 2026</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">كيف تقلل وقت تحميل موقعك بنسبة 70%</h3>
+                            <p class="text-slate-400 text-sm mb-4">تقنيات متقدمة لتحسين سرعة المواقع وتجربة المستخدم...</p>
+                            <button class="text-primary text-sm font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal blog-card">
+                        <div class="h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                            <i class="fas fa-paint-brush text-6xl text-purple-500/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="badge bg-purple-500/20 text-purple-400 text-xs">تصميم</span>
+                                <span class="text-xs text-slate-500">5 مايو 2026</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">اتجاهات تصميم UI/UX لعام 2026</h3>
+                            <p class="text-slate-400 text-sm mb-4">استكشف أحدث الاتجاهات في عالم تصميم واجهات المستخدم...</p>
+                            <button class="text-primary text-sm font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal blog-card">
+                        <div class="h-48 bg-gradient-to-br from-orange-500/20 to-yellow-500/20 flex items-center justify-center">
+                            <i class="fas fa-search text-6xl text-orange-500/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="badge bg-orange-500/20 text-orange-400 text-xs">SEO</span>
+                                <span class="text-xs text-slate-500">2 مايو 2026</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">دليل SEO الشامل للمطورين</h3>
+                            <p class="text-slate-400 text-sm mb-4">كيف تبني مواقع محسنة لمحركات البحث من الأساس...</p>
+                            <button class="text-primary text-sm font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal blog-card">
+                        <div class="h-48 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 flex items-center justify-center">
+                            <i class="fas fa-database text-6xl text-teal-500/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="badge bg-teal-500/20 text-teal-400 text-xs">قواعد بيانات</span>
+                                <span class="text-xs text-slate-500">28 أبريل 2026</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">اختيار قاعدة البيانات المناسبة لمشروعك</h3>
+                            <p class="text-slate-400 text-sm mb-4">SQL vs NoSQL: أيهما الأنسب لمشروعك القادم؟...</p>
+                            <button class="text-primary text-sm font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal blog-card">
+                        <div class="h-48 bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center">
+                            <i class="fas fa-code text-6xl text-red-500/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="badge bg-red-500/20 text-red-400 text-xs">تطوير</span>
+                                <span class="text-xs text-slate-500">25 أبريل 2026</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">Clean Code: أفضل الممارسات</h3>
+                            <p class="text-slate-400 text-sm mb-4">كيف تكتب كود نظيف وقابل للصيانة على المدى الطويل...</p>
+                            <button class="text-primary text-sm font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<div class="page pt-24" id="page-support">
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 reveal">الدعم الفني</h1>
+                    <p class="text-slate-400 text-lg reveal">نحن هنا لمساعدتك على مدار الساعة</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Support Options -->
+                    <div class="lg:col-span-2">
+                        <div class="glass rounded-2xl p-8 mb-8 reveal">
+                            <h2 class="text-2xl font-bold mb-6">فتح تذكرة دعم</h2>
+                            <form onsubmit="submitTicket(event)">
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">الموضوع *</label>
+                                        <input type="text" required class="form-input w-full rounded-xl py-3 px-4" placeholder="عنوان المشكلة">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">نوع التذكرة *</label>
+                                        <select required class="form-input w-full rounded-xl py-3 px-4">
+                                            <option value="">اختر النوع</option>
+                                            <option value="technical">مشكلة تقنية</option>
+                                            <option value="bug">Bug في النظام</option>
+                                            <option value="feature">طلب ميزة جديدة</option>
+                                            <option value="billing">استفسار مالي</option>
+                                            <option value="other">أخرى</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium mb-2">الوصف التفصيلي *</label>
+                                    <textarea required rows="4" class="form-input w-full rounded-xl py-3 px-4" placeholder="صف المشكلة بالتفصيل..."></textarea>
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium mb-2">الأولوية</label>
+                                    <div class="flex gap-3">
+                                        <label class="cursor-pointer flex-1">
+                                            <input type="radio" name="priority" value="low" class="hidden peer">
+                                            <div class="p-3 rounded-xl border border-slate-700 text-center peer-checked:border-green-500 peer-checked:bg-green-500/10 transition-all">
+                                                <div class="text-green-400 font-medium">عادي</div>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer flex-1">
+                                            <input type="radio" name="priority" value="medium" class="hidden peer" checked>
+                                            <div class="p-3 rounded-xl border border-slate-700 text-center peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all">
+                                                <div class="text-yellow-400 font-medium">متوسط</div>
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer flex-1">
+                                            <input type="radio" name="priority" value="high" class="hidden peer">
+                                            <div class="p-3 rounded-xl border border-slate-700 text-center peer-checked:border-red-500 peer-checked:bg-red-500/10 transition-all">
+                                                <div class="text-red-400 font-medium">عاجل</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                    <i class="fas fa-paper-plane ml-2"></i>
+                                    إرسال التذكرة
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Previous Tickets -->
+                        <div class="glass rounded-2xl p-8 reveal">
+                            <h2 class="text-2xl font-bold mb-6">تذاكرك السابقة</h2>
+                            <div class="space-y-4">
+                                <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-3">
+                                            <span class="status-dot status-completed"></span>
+                                            <span class="font-bold">#TKT-2026-001</span>
+                                        </div>
+                                        <span class="badge bg-green-500/20 text-green-400 text-xs">مغلقة</span>
+                                    </div>
+                                    <h4 class="font-medium mb-1">مشكلة في تحميل الصور</h4>
+                                    <p class="text-sm text-slate-400">تم إصلاح مشكلة تحميل الصور في لوحة التحكم</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span><i class="far fa-clock ml-1"></i>منذ 3 أيام</span>
+                                        <span><i class="far fa-comment ml-1"></i>5 ردود</span>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-3">
+                                            <span class="status-dot status-active"></span>
+                                            <span class="font-bold">#TKT-2026-002</span>
+                                        </div>
+                                        <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">قيد المعالجة</span>
+                                    </div>
+                                    <h4 class="font-medium mb-1">طلب إضافة ميزة جديدة</h4>
+                                    <p class="text-sm text-slate-400">طلب إضافة تقارير مبيعات شهرية</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span><i class="far fa-clock ml-1"></i>منذ يوم</span>
+                                        <span><i class="far fa-comment ml-1"></i>2 ردود</span>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-3">
+                                            <span class="status-dot status-pending"></span>
+                                            <span class="font-bold">#TKT-2026-003</span>
+                                        </div>
+                                        <span class="badge bg-primary/20 text-primary text-xs">مفتوحة</span>
+                                    </div>
+                                    <h4 class="font-medium mb-1">استفسار عن التحديث القادم</h4>
+                                    <p class="text-sm text-slate-400">متى سيتم إصدار التحديث الجديد للنظام؟</p>
+                                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                        <span><i class="far fa-clock ml-1"></i>منذ ساعتين</span>
+                                        <span><i class="far fa-comment ml-1"></i>0 ردود</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div>
+                        <div class="glass rounded-2xl p-6 mb-6 reveal">
+                            <h3 class="text-lg font-bold mb-4">معلومات التواصل</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-slate-500">البريد الإلكتروني</div>
+                                        <div class="font-medium">support@phi-platform.com</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-slate-500">الهاتف</div>
+                                        <div class="font-medium">+966 50 000 0000</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-slate-500">ساعات العمل</div>
+                                        <div class="font-medium">24/7 طوال أيام الأسبوع</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-2xl p-6 reveal">
+                            <h3 class="text-lg font-bold mb-4">اشتراكات الدعم</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-xl border border-slate-700 hover:border-primary transition-all cursor-pointer">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-bold">أساسي</span>
+                                        <span class="text-primary font-bold">$99/شهر</span>
+                                    </div>
+                                    <p class="text-sm text-slate-400">5 تذاكر شهرياً، استجابة خلال 24 ساعة</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-primary bg-primary/5 cursor-pointer">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-bold">احترافي</span>
+                                        <span class="text-primary font-bold">$299/شهر</span>
+                                    </div>
+                                    <p class="text-sm text-slate-400">تذاكر غير محدودة، استجابة خلال 4 ساعات</p>
+                                    <span class="badge bg-primary/20 text-primary text-xs mt-2">الأكثر شيوعاً</span>
+                                </div>
+                                <div class="p-4 rounded-xl border border-slate-700 hover:border-primary transition-all cursor-pointer">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-bold">مؤسسي</span>
+                                        <span class="text-primary font-bold">$799/شهر</span>
+                                    </div>
+                                    <p class="text-sm text-slate-400">دعم مخصص، استجابة فورية، مدير حساب</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<div class="page pt-24" id="page-dashboard">
+        <section class="py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Sidebar -->
+                    <div class="lg:w-64 flex-shrink-0">
+                        <div class="glass rounded-2xl p-4 sticky top-24" style="background: rgba(15, 23, 42, 0.95);">
+                            <div class="flex items-center gap-3 p-4 mb-4 border-b border-slate-700">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">
+                                    أ
+                                </div>
+                                <div>
+                                    <div class="font-bold">أحمد الشمري</div>
+                                    <div class="text-sm text-slate-500">عميل مميز</div>
+                                </div>
+                            </div>
+                            <nav class="space-y-1">
+                                <a onclick="switchDashboardTab('overview')" class="sidebar-item active flex items-center gap-3 p-3 cursor-pointer" data-tab="overview">
+                                    <i class="fas fa-chart-pie w-5"></i>
+                                    <span>نظرة عامة</span>
+                                </a>
+                                <a onclick="switchDashboardTab('orders')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="orders">
+                                    <i class="fas fa-shopping-bag w-5"></i>
+                                    <span>طلباتي</span>
+                                    <span class="mr-auto badge bg-primary/20 text-primary text-xs">3</span>
+                                </a>
+                                <a onclick="switchDashboardTab('invoices')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="invoices">
+                                    <i class="fas fa-file-invoice w-5"></i>
+                                    <span>الفواتير</span>
+                                </a>
+                                <a onclick="switchDashboardTab('files')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="files">
+                                    <i class="fas fa-folder w-5"></i>
+                                    <span>الملفات</span>
+                                </a>
+                                <a onclick="switchDashboardTab('support')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="support">
+                                    <i class="fas fa-headset w-5"></i>
+                                    <span>الدعم</span>
+                                    <span class="mr-auto badge bg-yellow-500/20 text-yellow-400 text-xs">1</span>
+                                </a>
+                                <a onclick="switchDashboardTab('settings')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="settings">
+                                    <i class="fas fa-cog w-5"></i>
+                                    <span>الإعدادات</span>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="flex-1">
+                        <!-- Overview Tab -->
+                        <div class="dashboard-tab" id="dash-overview">
+                            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                                <div class="glass rounded-2xl p-6 reveal">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+                                            <i class="fas fa-shopping-bag text-xl"></i>
+                                        </div>
+                                        <span class="badge bg-green-500/20 text-green-400 text-xs">+12%</span>
+                                    </div>
+                                    <div class="text-3xl font-bold mb-1">12</div>
+                                    <div class="text-slate-400">طلب إجمالي</div>
+                                </div>
+                                <div class="glass rounded-2xl p-6 reveal">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary">
+                                            <i class="fas fa-dollar-sign text-xl"></i>
+                                        </div>
+                                        <span class="badge bg-green-500/20 text-green-400 text-xs">+8%</span>
+                                    </div>
+                                    <div class="text-3xl font-bold mb-1">$8,450</div>
+                                    <div class="text-slate-400">إجمالي المشتريات</div>
+                                </div>
+                                <div class="glass rounded-2xl p-6 reveal">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
+                                            <i class="fas fa-check-circle text-xl"></i>
+                                        </div>
+                                        <span class="badge bg-primary/20 text-primary text-xs">92%</span>
+                                    </div>
+                                    <div class="text-3xl font-bold mb-1">11</div>
+                                    <div class="text-slate-400">مشروع مكتمل</div>
+                                </div>
+                            </div>
+
+                            <!-- Activity Chart -->
+                            <div class="glass rounded-2xl p-6 mb-8 reveal">
+                                <h3 class="text-lg font-bold mb-6">نشاطك الشهري</h3>
+                                <div class="flex items-end gap-2 h-48">
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/40 rounded-t-lg chart-bar" style="height: 40%"></div>
+                                        <span class="text-xs text-slate-500">يناير</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/50 rounded-t-lg chart-bar" style="height: 60%"></div>
+                                        <span class="text-xs text-slate-500">فبراير</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/60 rounded-t-lg chart-bar" style="height: 45%"></div>
+                                        <span class="text-xs text-slate-500">مارس</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/70 rounded-t-lg chart-bar" style="height: 80%"></div>
+                                        <span class="text-xs text-slate-500">أبريل</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/80 rounded-t-lg chart-bar" style="height: 65%"></div>
+                                        <span class="text-xs text-slate-500">مايو</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary rounded-t-lg chart-bar" style="height: 90%"></div>
+                                        <span class="text-xs text-slate-500">يونيو</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Orders -->
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">آخر الطلبات</h3>
+                                <div class="overflow-x-auto">
+                                    <table class="data-table w-full">
+                                        <thead>
+                                            <tr>
+                                                <th>رقم الطلب</th>
+                                                <th>المنتج</th>
+                                                <th>التاريخ</th>
+                                                <th>الحالة</th>
+                                                <th>المبلغ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-medium">#ORD-2026-012</td>
+                                                <td>متجر إلكتروني متكامل</td>
+                                                <td class="text-slate-400">10 مايو 2026</td>
+                                                <td><span class="badge bg-green-500/20 text-green-400">مكتمل</span></td>
+                                                <td class="font-bold">$499</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-medium">#ORD-2026-011</td>
+                                                <td>تحسين SEO</td>
+                                                <td class="text-slate-400">5 مايو 2026</td>
+                                                <td><span class="badge bg-yellow-500/20 text-yellow-400">قيد التنفيذ</span></td>
+                                                <td class="font-bold">$250</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-medium">#ORD-2026-010</td>
+                                                <td>فحص ثغرات أمنية</td>
+                                                <td class="text-slate-400">1 مايو 2026</td>
+                                                <td><span class="badge bg-green-500/20 text-green-400">مكتمل</span></td>
+                                                <td class="font-bold">$200</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Orders Tab -->
+                        <div class="dashboard-tab hidden" id="dash-orders">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">جميع الطلبات</h3>
+                                <div class="space-y-4">
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="font-bold">#ORD-2026-012</span>
+                                            <span class="badge bg-green-500/20 text-green-400">مكتمل</span>
+                                        </div>
+                                        <p class="text-slate-400 mb-2">متجر إلكتروني متكامل</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-slate-500">10 مايو 2026</span>
+                                            <span class="font-bold gradient-text">$499</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="font-bold">#ORD-2026-011</span>
+                                            <span class="badge bg-yellow-500/20 text-yellow-400">قيد التنفيذ</span>
+                                        </div>
+                                        <p class="text-slate-400 mb-2">تحسين SEO - خدمة شهرية</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-slate-500">5 مايو 2026</span>
+                                            <span class="font-bold gradient-text">$250</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="font-bold">#ORD-2026-010</span>
+                                            <span class="badge bg-green-500/20 text-green-400">مكتمل</span>
+                                        </div>
+                                        <p class="text-slate-400 mb-2">فحص ثغرات أمنية</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-slate-500">1 مايو 2026</span>
+                                            <span class="font-bold gradient-text">$200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invoices Tab -->
+                        <div class="dashboard-tab hidden" id="dash-invoices">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">الفواتير</h3>
+                                <div class="space-y-4">
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center justify-between">
+                                        <div>
+                                            <div class="font-bold mb-1">فاتورة #INV-2026-012</div>
+                                            <div class="text-sm text-slate-400">متجر إلكتروني متكامل</div>
+                                            <div class="text-sm text-slate-500 mt-1">10 مايو 2026</div>
+                                        </div>
+                                        <div class="text-left">
+                                            <div class="text-2xl font-bold gradient-text">$499</div>
+                                            <span class="badge bg-green-500/20 text-green-400 text-xs">مدفوعة</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center justify-between">
+                                        <div>
+                                            <div class="font-bold mb-1">فاتورة #INV-2026-011</div>
+                                            <div class="text-sm text-slate-400">تحسين SEO</div>
+                                            <div class="text-sm text-slate-500 mt-1">5 مايو 2026</div>
+                                        </div>
+                                        <div class="text-left">
+                                            <div class="text-2xl font-bold gradient-text">$250</div>
+                                            <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">معلقة</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Files Tab -->
+                        <div class="dashboard-tab hidden" id="dash-files">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">ملفاتي</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center text-red-400">
+                                            <i class="fas fa-file-pdf text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium">عقد المشروع.pdf</div>
+                                            <div class="text-sm text-slate-500">2.4 MB • 10 مايو 2026</div>
+                                        </div>
+                                        <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                            <i class="fas fa-file-word text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium">متطلبات المشروع.docx</div>
+                                            <div class="text-sm text-slate-500">1.2 MB • 8 مايو 2026</div>
+                                        </div>
+                                        <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400">
+                                            <i class="fas fa-file-code text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium">source-code.zip</div>
+                                            <div class="text-sm text-slate-500">15.7 MB • 12 مايو 2026</div>
+                                        </div>
+                                        <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Support Tab -->
+                        <div class="dashboard-tab hidden" id="dash-support">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">تذاكر الدعم</h3>
+                                <div class="space-y-4">
+                                    <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center gap-3">
+                                                <span class="status-dot status-completed"></span>
+                                                <span class="font-bold">#TKT-2026-001</span>
+                                            </div>
+                                            <span class="badge bg-green-500/20 text-green-400 text-xs">مغلقة</span>
+                                        </div>
+                                        <h4 class="font-medium mb-1">مشكلة في تحميل الصور</h4>
+                                        <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                            <span><i class="far fa-clock ml-1"></i>منذ 3 أيام</span>
+                                            <span><i class="far fa-comment ml-1"></i>5 ردود</span>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center gap-3">
+                                                <span class="status-dot status-active"></span>
+                                                <span class="font-bold">#TKT-2026-002</span>
+                                            </div>
+                                            <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">قيد المعالجة</span>
+                                        </div>
+                                        <h4 class="font-medium mb-1">طلب إضافة ميزة جديدة</h4>
+                                        <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                            <span><i class="far fa-clock ml-1"></i>منذ يوم</span>
+                                            <span><i class="far fa-comment ml-1"></i>2 ردود</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Settings Tab -->
+                        <div class="dashboard-tab hidden" id="dash-settings">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">إعدادات الحساب</h3>
+                                <form onsubmit="showToast('تم حفظ الإعدادات بنجاح'); event.preventDefault();">
+                                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">الاسم الكامل</label>
+                                            <input type="text" value="أحمد الشمري" class="form-input w-full rounded-xl py-3 px-4">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
+                                            <input type="email" value="ahmed@example.com" class="form-input w-full rounded-xl py-3 px-4">
+                                        </div>
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">رقم الجوال</label>
+                                            <input type="tel" value="+966 50 000 0000" class="form-input w-full rounded-xl py-3 px-4">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">الشركة</label>
+                                            <input type="text" value="شركة التقنية المتقدمة" class="form-input w-full rounded-xl py-3 px-4">
+                                        </div>
+                                    </div>
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium mb-2">الإشعارات</label>
+                                        <div class="space-y-3">
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="checkbox" checked class="custom-checkbox">
+                                                <span>إشعارات البريد الإلكتروني</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="checkbox" checked class="custom-checkbox">
+                                                <span>إشعارات الرسائل النصية</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="checkbox" class="custom-checkbox">
+                                                <span>إشعارات التسويق</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                        حفظ الإعدادات
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 mt-24" style="background: #020617;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">
+                            Φ
+                        </div>
+                        <span class="text-xl font-bold gradient-text">Phi Platform</span>
+                    </div>
+                    <p class="text-slate-400 mb-6 leading-relaxed">منصة متكاملة لبيع الحلول البرمجية والخدمات التقنية للشركات والأفراد.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">روابط سريعة</h4>
+                    <div class="space-y-3">
+                        <a onclick="navigateTo('products')" class="footer-link cursor-pointer">المتجر</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">الخدمات</a>
+                        <a onclick="navigateTo('portfolio')" class="footer-link cursor-pointer">الأعمال</a>
+                        <a onclick="navigateTo('blog')" class="footer-link cursor-pointer">المدونة</a>
+                        <a onclick="navigateTo('support')" class="footer-link cursor-pointer">الدعم</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">الخدمات</h4>
+                    <div class="space-y-3">
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">تطوير المواقع</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">تطبيقات الموبايل</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">الأمن السيبراني</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">DevOps</a>
+                        <a onclick="navigateTo('services')" class="footer-link cursor-pointer">تحسين الأداء</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">النشرة البريدية</h4>
+                    <p class="text-slate-400 mb-4">اشترك للحصول على آخر الأخبار والعروض</p>
+                    <form onsubmit="showToast('تم الاشتراك بنجاح!'); event.preventDefault();" class="flex">
+                        <input type="email" placeholder="بريدك الإلكتروني" class="newsletter-input flex-1">
+                        <button type="submit" class="px-4 py-3 rounded-xl rounded-r-none bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg transition-all">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between">
+                <p class="text-slate-500 text-sm">© 2026 Phi Platform. جميع الحقوق محفوظة.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="text-slate-500 hover:text-primary text-sm transition-colors">سياسة الخصوصية</a>
+                    <a href="#" class="text-slate-500 hover:text-primary text-sm transition-colors">شروط الاستخدام</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script src="src/js/modules/core/navigation.js"></script>
+    <script src="src/js/modules/ui/feedback.js"></script>
+    <script src="src/js/modules/pages/products.js"></script>
+    <script src="src/js/modules/pages/services.js"></script>
+    <script src="src/js/modules/pages/dashboard.js"></script>
+    <script src="src/js/modules/forms/forms.js"></script>
+    <script src="src/js/modules/effects/scroll.js"></script>
+    <script src="src/js/modules/effects/counters.js"></script>
+    <script src="src/js/modules/effects/particles.js"></script>
+    <script src="src/js/modules/effects/cursor.js"></script>
+    <script src="src/js/modules/effects/typing.js"></script>
+    <script src="src/js/modules/effects/navbar.js"></script>
+    <script src="src/js/modules/effects/loading.js"></script>
+    <script src="src/js/modules/effects/tilt.js"></script>
+    <script src="src/js/modules/effects/spotlight.js"></script>
+    <script src="src/js/modules/effects/confetti.js"></script>
+    <script src="src/js/app.js"></script>
+</body>
+</html>

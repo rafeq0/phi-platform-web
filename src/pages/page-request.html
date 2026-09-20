@@ -1,0 +1,124 @@
+<div class="page pt-24" id="page-request">
+        <section class="py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 reveal">اطلب مشروعك المخصص</h1>
+                    <p class="text-slate-400 text-lg reveal">أخبرنا عن مشروعك وسنقوم بتحليله وتقديم عرض مناسب</p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 lg:p-12 reveal">
+                    <form onsubmit="submitProjectRequest(event)">
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">الاسم الكامل *</label>
+                                <input type="text" required class="form-input w-full rounded-xl py-3 px-4" placeholder="أحمد محمد">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">البريد الإلكتروني *</label>
+                                <input type="email" required class="form-input w-full rounded-xl py-3 px-4" placeholder="ahmed@example.com">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">رقم الجوال</label>
+                                <input type="tel" class="form-input w-full rounded-xl py-3 px-4" placeholder="+966 50 000 0000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">نوع المشروع *</label>
+                                <select required class="form-input w-full rounded-xl py-3 px-4">
+                                    <option value="">اختر نوع المشروع</option>
+                                    <option value="website">موقع إلكتروني</option>
+                                    <option value="app">تطبيق موبايل</option>
+                                    <option value="erp">نظام ERP</option>
+                                    <option value="ecommerce">متجر إلكتروني</option>
+                                    <option value="booking">منصة حجز</option>
+                                    <option value="saas">SaaS Startup</option>
+                                    <option value="other">أخرى</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">الميزانية المتوقعة</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="budget" value="1000-5000" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">$1,000 - $5,000</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="budget" value="5000-10000" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">$5,000 - $10,000</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="budget" value="10000-50000" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">$10,000 - $50,000</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="budget" value="50000+" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">$50,000+</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">المدة المتوقعة</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="1-2weeks" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">1-2 أسابيع</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="1month" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">شهر</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="2-3months" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">2-3 أشهر</div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="3months+" class="hidden peer">
+                                    <div class="p-4 rounded-xl border border-slate-700 text-center peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
+                                        <div class="font-bold">3+ أشهر</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">وصف المشروع *</label>
+                            <textarea required rows="6" class="form-input w-full rounded-xl py-3 px-4" placeholder="صف مشروعك بالتفصيل... ما هي المشكلة التي يحلها؟ من هم المستخدمون المستهدفون؟ ما هي الميزات الأساسية؟"></textarea>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">الملفات المرفقة (اختياري)</label>
+                            <div class="border-2 border-dashed border-slate-700 rounded-xl p-8 text-center hover:border-primary transition-all cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-slate-500 mb-4"></i>
+                                <p class="text-slate-400">اسحب الملفات هنا أو اضغط للاختيار</p>
+                                <p class="text-sm text-slate-600 mt-2">PDF, DOC, PNG, JPG (Max 10MB)</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all liquid-btn">
+                            <i class="fas fa-paper-plane ml-2"></i>
+                            إرسال الطلب
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>

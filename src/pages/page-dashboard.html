@@ -1,0 +1,365 @@
+<div class="page pt-24" id="page-dashboard">
+        <section class="py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Sidebar -->
+                    <div class="lg:w-64 flex-shrink-0">
+                        <div class="glass rounded-2xl p-4 sticky top-24" style="background: rgba(15, 23, 42, 0.95);">
+                            <div class="flex items-center gap-3 p-4 mb-4 border-b border-slate-700">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">
+                                    أ
+                                </div>
+                                <div>
+                                    <div class="font-bold">أحمد الشمري</div>
+                                    <div class="text-sm text-slate-500">عميل مميز</div>
+                                </div>
+                            </div>
+                            <nav class="space-y-1">
+                                <a onclick="switchDashboardTab('overview')" class="sidebar-item active flex items-center gap-3 p-3 cursor-pointer" data-tab="overview">
+                                    <i class="fas fa-chart-pie w-5"></i>
+                                    <span>نظرة عامة</span>
+                                </a>
+                                <a onclick="switchDashboardTab('orders')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="orders">
+                                    <i class="fas fa-shopping-bag w-5"></i>
+                                    <span>طلباتي</span>
+                                    <span class="mr-auto badge bg-primary/20 text-primary text-xs">3</span>
+                                </a>
+                                <a onclick="switchDashboardTab('invoices')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="invoices">
+                                    <i class="fas fa-file-invoice w-5"></i>
+                                    <span>الفواتير</span>
+                                </a>
+                                <a onclick="switchDashboardTab('files')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="files">
+                                    <i class="fas fa-folder w-5"></i>
+                                    <span>الملفات</span>
+                                </a>
+                                <a onclick="switchDashboardTab('support')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="support">
+                                    <i class="fas fa-headset w-5"></i>
+                                    <span>الدعم</span>
+                                    <span class="mr-auto badge bg-yellow-500/20 text-yellow-400 text-xs">1</span>
+                                </a>
+                                <a onclick="switchDashboardTab('settings')" class="sidebar-item flex items-center gap-3 p-3 cursor-pointer" data-tab="settings">
+                                    <i class="fas fa-cog w-5"></i>
+                                    <span>الإعدادات</span>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="flex-1">
+                        <!-- Overview Tab -->
+                        <div class="dashboard-tab" id="dash-overview">
+                            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                                <div class="glass rounded-2xl p-6 reveal">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+                                            <i class="fas fa-shopping-bag text-xl"></i>
+                                        </div>
+                                        <span class="badge bg-green-500/20 text-green-400 text-xs">+12%</span>
+                                    </div>
+                                    <div class="text-3xl font-bold mb-1">12</div>
+                                    <div class="text-slate-400">طلب إجمالي</div>
+                                </div>
+                                <div class="glass rounded-2xl p-6 reveal">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary">
+                                            <i class="fas fa-dollar-sign text-xl"></i>
+                                        </div>
+                                        <span class="badge bg-green-500/20 text-green-400 text-xs">+8%</span>
+                                    </div>
+                                    <div class="text-3xl font-bold mb-1">$8,450</div>
+                                    <div class="text-slate-400">إجمالي المشتريات</div>
+                                </div>
+                                <div class="glass rounded-2xl p-6 reveal">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
+                                            <i class="fas fa-check-circle text-xl"></i>
+                                        </div>
+                                        <span class="badge bg-primary/20 text-primary text-xs">92%</span>
+                                    </div>
+                                    <div class="text-3xl font-bold mb-1">11</div>
+                                    <div class="text-slate-400">مشروع مكتمل</div>
+                                </div>
+                            </div>
+
+                            <!-- Activity Chart -->
+                            <div class="glass rounded-2xl p-6 mb-8 reveal">
+                                <h3 class="text-lg font-bold mb-6">نشاطك الشهري</h3>
+                                <div class="flex items-end gap-2 h-48">
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/40 rounded-t-lg chart-bar" style="height: 40%"></div>
+                                        <span class="text-xs text-slate-500">يناير</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/50 rounded-t-lg chart-bar" style="height: 60%"></div>
+                                        <span class="text-xs text-slate-500">فبراير</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/60 rounded-t-lg chart-bar" style="height: 45%"></div>
+                                        <span class="text-xs text-slate-500">مارس</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/70 rounded-t-lg chart-bar" style="height: 80%"></div>
+                                        <span class="text-xs text-slate-500">أبريل</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary/80 rounded-t-lg chart-bar" style="height: 65%"></div>
+                                        <span class="text-xs text-slate-500">مايو</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-2">
+                                        <div class="w-full bg-primary rounded-t-lg chart-bar" style="height: 90%"></div>
+                                        <span class="text-xs text-slate-500">يونيو</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Orders -->
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">آخر الطلبات</h3>
+                                <div class="overflow-x-auto">
+                                    <table class="data-table w-full">
+                                        <thead>
+                                            <tr>
+                                                <th>رقم الطلب</th>
+                                                <th>المنتج</th>
+                                                <th>التاريخ</th>
+                                                <th>الحالة</th>
+                                                <th>المبلغ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-medium">#ORD-2026-012</td>
+                                                <td>متجر إلكتروني متكامل</td>
+                                                <td class="text-slate-400">10 مايو 2026</td>
+                                                <td><span class="badge bg-green-500/20 text-green-400">مكتمل</span></td>
+                                                <td class="font-bold">$499</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-medium">#ORD-2026-011</td>
+                                                <td>تحسين SEO</td>
+                                                <td class="text-slate-400">5 مايو 2026</td>
+                                                <td><span class="badge bg-yellow-500/20 text-yellow-400">قيد التنفيذ</span></td>
+                                                <td class="font-bold">$250</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-medium">#ORD-2026-010</td>
+                                                <td>فحص ثغرات أمنية</td>
+                                                <td class="text-slate-400">1 مايو 2026</td>
+                                                <td><span class="badge bg-green-500/20 text-green-400">مكتمل</span></td>
+                                                <td class="font-bold">$200</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Orders Tab -->
+                        <div class="dashboard-tab hidden" id="dash-orders">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">جميع الطلبات</h3>
+                                <div class="space-y-4">
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="font-bold">#ORD-2026-012</span>
+                                            <span class="badge bg-green-500/20 text-green-400">مكتمل</span>
+                                        </div>
+                                        <p class="text-slate-400 mb-2">متجر إلكتروني متكامل</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-slate-500">10 مايو 2026</span>
+                                            <span class="font-bold gradient-text">$499</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="font-bold">#ORD-2026-011</span>
+                                            <span class="badge bg-yellow-500/20 text-yellow-400">قيد التنفيذ</span>
+                                        </div>
+                                        <p class="text-slate-400 mb-2">تحسين SEO - خدمة شهرية</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-slate-500">5 مايو 2026</span>
+                                            <span class="font-bold gradient-text">$250</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="font-bold">#ORD-2026-010</span>
+                                            <span class="badge bg-green-500/20 text-green-400">مكتمل</span>
+                                        </div>
+                                        <p class="text-slate-400 mb-2">فحص ثغرات أمنية</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-slate-500">1 مايو 2026</span>
+                                            <span class="font-bold gradient-text">$200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invoices Tab -->
+                        <div class="dashboard-tab hidden" id="dash-invoices">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">الفواتير</h3>
+                                <div class="space-y-4">
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center justify-between">
+                                        <div>
+                                            <div class="font-bold mb-1">فاتورة #INV-2026-012</div>
+                                            <div class="text-sm text-slate-400">متجر إلكتروني متكامل</div>
+                                            <div class="text-sm text-slate-500 mt-1">10 مايو 2026</div>
+                                        </div>
+                                        <div class="text-left">
+                                            <div class="text-2xl font-bold gradient-text">$499</div>
+                                            <span class="badge bg-green-500/20 text-green-400 text-xs">مدفوعة</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center justify-between">
+                                        <div>
+                                            <div class="font-bold mb-1">فاتورة #INV-2026-011</div>
+                                            <div class="text-sm text-slate-400">تحسين SEO</div>
+                                            <div class="text-sm text-slate-500 mt-1">5 مايو 2026</div>
+                                        </div>
+                                        <div class="text-left">
+                                            <div class="text-2xl font-bold gradient-text">$250</div>
+                                            <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">معلقة</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Files Tab -->
+                        <div class="dashboard-tab hidden" id="dash-files">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">ملفاتي</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center text-red-400">
+                                            <i class="fas fa-file-pdf text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium">عقد المشروع.pdf</div>
+                                            <div class="text-sm text-slate-500">2.4 MB • 10 مايو 2026</div>
+                                        </div>
+                                        <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                            <i class="fas fa-file-word text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium">متطلبات المشروع.docx</div>
+                                            <div class="text-sm text-slate-500">1.2 MB • 8 مايو 2026</div>
+                                        </div>
+                                        <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-surface/50 border border-slate-700 flex items-center gap-4">
+                                        <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400">
+                                            <i class="fas fa-file-code text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="font-medium">source-code.zip</div>
+                                            <div class="text-sm text-slate-500">15.7 MB • 12 مايو 2026</div>
+                                        </div>
+                                        <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Support Tab -->
+                        <div class="dashboard-tab hidden" id="dash-support">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">تذاكر الدعم</h3>
+                                <div class="space-y-4">
+                                    <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center gap-3">
+                                                <span class="status-dot status-completed"></span>
+                                                <span class="font-bold">#TKT-2026-001</span>
+                                            </div>
+                                            <span class="badge bg-green-500/20 text-green-400 text-xs">مغلقة</span>
+                                        </div>
+                                        <h4 class="font-medium mb-1">مشكلة في تحميل الصور</h4>
+                                        <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                            <span><i class="far fa-clock ml-1"></i>منذ 3 أيام</span>
+                                            <span><i class="far fa-comment ml-1"></i>5 ردود</span>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-card p-4 rounded-xl" style="background: rgba(15, 23, 42, 0.7);">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center gap-3">
+                                                <span class="status-dot status-active"></span>
+                                                <span class="font-bold">#TKT-2026-002</span>
+                                            </div>
+                                            <span class="badge bg-yellow-500/20 text-yellow-400 text-xs">قيد المعالجة</span>
+                                        </div>
+                                        <h4 class="font-medium mb-1">طلب إضافة ميزة جديدة</h4>
+                                        <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                                            <span><i class="far fa-clock ml-1"></i>منذ يوم</span>
+                                            <span><i class="far fa-comment ml-1"></i>2 ردود</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Settings Tab -->
+                        <div class="dashboard-tab hidden" id="dash-settings">
+                            <div class="glass rounded-2xl p-6 reveal">
+                                <h3 class="text-lg font-bold mb-6">إعدادات الحساب</h3>
+                                <form onsubmit="showToast('تم حفظ الإعدادات بنجاح'); event.preventDefault();">
+                                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">الاسم الكامل</label>
+                                            <input type="text" value="أحمد الشمري" class="form-input w-full rounded-xl py-3 px-4">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
+                                            <input type="email" value="ahmed@example.com" class="form-input w-full rounded-xl py-3 px-4">
+                                        </div>
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">رقم الجوال</label>
+                                            <input type="tel" value="+966 50 000 0000" class="form-input w-full rounded-xl py-3 px-4">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">الشركة</label>
+                                            <input type="text" value="شركة التقنية المتقدمة" class="form-input w-full rounded-xl py-3 px-4">
+                                        </div>
+                                    </div>
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium mb-2">الإشعارات</label>
+                                        <div class="space-y-3">
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="checkbox" checked class="custom-checkbox">
+                                                <span>إشعارات البريد الإلكتروني</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="checkbox" checked class="custom-checkbox">
+                                                <span>إشعارات الرسائل النصية</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="checkbox" class="custom-checkbox">
+                                                <span>إشعارات التسويق</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold hover:shadow-lg hover:shadow-primary/30 transition-all">
+                                        حفظ الإعدادات
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
