@@ -1,0 +1,369 @@
+<div class="page active" id="page-home">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-20 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl float"></div>
+                <div class="absolute bottom-20 left-10 w-80 h-80 bg-secondary/20 rounded-full blur-3xl float" style="animation-delay: 2s;"></div>
+                <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-accent/10 rounded-full blur-3xl float" style="animation-delay: 4s;"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-right">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 reveal">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            منصة الحلول البرمجية المتكاملة
+                        </div>
+
+                        <h1 class="hero-title text-5xl lg:text-7xl font-black mb-6 leading-tight reveal">
+                            نبني <span class="gradient-text typing-cursor" id="typingText">المستقبل</span><br>
+                            <span class="text-slate-400">بالتقنية</span>
+                        </h1>
+
+                        <p class="text-xl text-slate-400 mb-8 leading-relaxed reveal">
+                            حلول برمجية متكاملة للشركات والأفراد. من التصميم إلى التطوير، من البيع إلى الصيانة.
+                            نحول أفكارك إلى واقع رقمي متقدم.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal">
+                            <button onclick="navigateTo('products')" class="px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all glow-hover liquid-btn">
+                                <i class="fas fa-shopping-bag ml-2"></i>
+                                تصفح المنتجات
+                            </button>
+                            <button onclick="openModal()" class="px-8 py-4 rounded-xl border border-slate-700 text-slate-300 font-bold text-lg hover:border-primary hover:text-white transition-all">
+                                <i class="fas fa-play ml-2"></i>
+                                ابدأ مشروعك
+                            </button>
+                        </div>
+
+                        <div class="flex items-center gap-8 mt-12 justify-center lg:justify-start reveal">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold gradient-text animated-counter" data-target="500">0</div>
+                                <div class="text-sm text-slate-500">عميل سعيد</div>
+                            </div>
+                            <div class="w-px h-12 bg-slate-800"></div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold gradient-text animated-counter" data-target="1200">0</div>
+                                <div class="text-sm text-slate-500">مشروع منجز</div>
+                            </div>
+                            <div class="w-px h-12 bg-slate-800"></div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold gradient-text animated-counter" data-target="99">0</div>
+                                <div class="text-sm text-slate-500">% رضا العملاء</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative hidden lg:block">
+                        <div class="code-block float">
+                            <div class="flex items-center gap-2 mb-4 relative z-10">
+                                <span class="code-dot red"></span>
+                                <span class="code-dot yellow"></span>
+                                <span class="code-dot green"></span>
+                                <span class="text-slate-500 text-xs mr-4">phi-platform.js</span>
+                            </div>
+                            <div class="relative z-10 text-right" dir="ltr">
+                                <div><span class="code-comment">// Phi Platform - Build the Future</span></div>
+                                <div class="mt-2"><span class="code-keyword">import</span> { <span class="code-function">Innovation</span>, <span class="code-function">Excellence</span> } <span class="code-keyword">from</span> <span class="code-string">'@phi/core'</span>;</div>
+                                <div class="mt-2"><span class="code-keyword">const</span> <span class="code-function">platform</span> = <span class="code-keyword">new</span> <span class="code-function">PhiPlatform</span>({</div>
+                                <div class="mr-4"><span class="code-function">vision</span>: <span class="code-string">'Transform Ideas'</span>,</div>
+                                <div class="mr-4"><span class="code-function">power</span>: <span class="code-string">'Cutting Edge Tech'</span>,</div>
+                                <div class="mr-4"><span class="code-function">clients</span>: <span class="code-number">500</span>,</div>
+                                <div class="mr-4"><span class="code-function">success</span>: <span class="code-number">99.9</span></div>
+                                <div>});</div>
+                                <div class="mt-2"><span class="code-function">platform</span>.<span class="code-function">launch</span>().<span class="code-function">then</span>(() => {</div>
+                                <div class="mr-4"><span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'Success! 🚀'</span>);</div>
+                                <div>});</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div class="absolute -top-10 -right-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/30 to-secondary/30 border border-primary/30 flex items-center justify-center float" style="animation-delay: 1s;">
+                            <i class="fas fa-code text-primary text-2xl"></i>
+                        </div>
+                        <div class="absolute -bottom-5 -left-5 w-16 h-16 rounded-xl bg-gradient-to-br from-accent/30 to-primary/30 border border-accent/30 flex items-center justify-center float" style="animation-delay: 3s;">
+                            <i class="fas fa-shield-alt text-accent text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden lg:block">
+                    <div class="scroll-indicator"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-4xl lg:text-5xl font-bold mb-4 reveal">ماذا نقدم لك؟</h2>
+                    <p class="text-slate-400 text-lg max-w-2xl mx-auto reveal">حلول تقنية شاملة تغطي كل احتياجاتك الرقمية من الألف إلى الياء</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service 1 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-shopping-cart text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">متجر المنتجات البرمجية</h3>
+                        <p class="text-slate-400 leading-relaxed">مواقع جاهزة، أنظمة إدارة، تطبيقات موبايل، قوالب SaaS، أدوات أتمتة، وAPIs جاهزة للشراء الفوري.</p>
+                        <button onclick="navigateTo('products')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            تصفح المتجر <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-project-diagram text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">مشاريع مخصصة</h3>
+                        <p class="text-slate-400 leading-relaxed">مواقع خاصة، تطبيقات مخصصة، أنظمة ERP، منصات حجز، متاجر إلكترونية، وحلول SaaS مبتكرة.</p>
+                        <button onclick="navigateTo('request')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            اطلب مشروع <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-tools text-accent"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">خدمات تقنية مستمرة</h3>
+                        <p class="text-slate-400 leading-relaxed">صيانة مواقع، إصلاح bugs، تحسين السرعة، تحديث الأنظمة، refactoring، وخدمات DevOps احترافية.</p>
+                        <button onclick="navigateTo('services')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            اكتشف الخدمات <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-shield-alt text-red-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">الأمن السيبراني</h3>
+                        <p class="text-slate-400 leading-relaxed">فحص ثغرات، حماية المواقع، Hardening، إعداد SSL/Cloudflare، استعادة اختراقات، وتقارير أمنية شاملة.</p>
+                        <button onclick="navigateTo('services')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            حماية موقعك <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-chart-line text-green-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">النمو والتحسين</h3>
+                        <p class="text-slate-400 leading-relaxed">تحسين SEO، تحسين معدل التحويل، إعادة تصميم UI/UX، تحليلات متقدمة، وتحسين قمع المبيعات.</p>
+                        <button onclick="navigateTo('services')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            نمو أعمالك <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="glass-card rounded-2xl p-8 reveal spotlight">
+                        <div class="service-icon mb-6">
+                            <i class="fas fa-headset text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">الدعم الفني 24/7</h3>
+                        <p class="text-slate-400 leading-relaxed">نظام تذاكر متكامل، استجابة سريعة، فريق دعم متخصص، واشتراكات صيانة مرنة تناسب كل احتياج.</p>
+                        <button onclick="navigateTo('support')" class="mt-6 text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-2">
+                            احصل على دعم <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="py-24 relative overflow-hidden">
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-4 reveal">كيف نعمل؟</h2>
+                    <p class="text-slate-400 text-lg max-w-2xl mx-auto reveal">عملية منظمة وشفافة من البداية إلى النهاية</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center reveal">
+                        <div class="process-step-number mx-auto mb-4">1</div>
+                        <h3 class="text-lg font-bold mb-2">التحليل</h3>
+                        <p class="text-slate-400 text-sm">نفهم احتياجاتك بدقة ونحلل المتطلبات التقنية</p>
+                    </div>
+                    <div class="text-center reveal">
+                        <div class="process-step-number mx-auto mb-4">2</div>
+                        <h3 class="text-lg font-bold mb-2">التصميم</h3>
+                        <p class="text-slate-400 text-sm">نصمم واجهات مستخدم حديثة وتجربة سلسة</p>
+                    </div>
+                    <div class="text-center reveal">
+                        <div class="process-step-number mx-auto mb-4">3</div>
+                        <h3 class="text-lg font-bold mb-2">التطوير</h3>
+                        <p class="text-slate-400 text-sm">نبني الحلول بأحدث التقنيات وأفضل الممارسات</p>
+                    </div>
+                    <div class="text-center reveal">
+                        <div class="process-step-number mx-auto mb-4">4</div>
+                        <h3 class="text-lg font-bold mb-2">الإطلاق</h3>
+                        <p class="text-slate-400 text-sm">نطلق مشروعك مع دعم مستمر وصيانة دورية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                    <div>
+                        <h2 class="text-4xl font-bold mb-2 reveal">منتجات مميزة</h2>
+                        <p class="text-slate-400 reveal">حلول جاهزة للاستخدام الفوري</p>
+                    </div>
+                    <button onclick="navigateTo('products')" class="mt-4 md:mt-0 px-6 py-3 rounded-xl border border-primary/30 text-primary hover:bg-primary/10 transition-all reveal">
+                        عرض الكل <i class="fas fa-arrow-left mr-2"></i>
+                    </button>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card rounded-2xl overflow-hidden reveal tilt-card">
+                        <div class="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center relative overflow-hidden">
+                            <i class="fas fa-store text-6xl text-primary/30"></i>
+                            <div class="absolute top-4 right-4 badge bg-green-500/20 text-green-400 border border-green-500/30">جديد</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2">متجر إلكتروني متكامل</h3>
+                            <p class="text-slate-400 text-sm mb-4">منصة تجارة إلكترونية مع إدارة منتجات، طلبات، دفع، وشحن</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$499</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal tilt-card">
+                        <div class="h-48 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center relative overflow-hidden">
+                            <i class="fas fa-building text-6xl text-secondary/30"></i>
+                            <div class="absolute top-4 right-4 badge bg-primary/20 text-primary border border-primary/30">الأكثر مبيعاً</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2">نظام ERP متكامل</h3>
+                            <p class="text-slate-400 text-sm mb-4">إدارة موارد المؤسسات مع HR، مالية، مخزون، وCRM</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$999</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl overflow-hidden reveal tilt-card">
+                        <div class="h-48 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center relative overflow-hidden">
+                            <i class="fas fa-mobile-alt text-6xl text-accent/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-2">تطبيق موبايل Flutter</h3>
+                            <p class="text-slate-400 text-sm mb-4">تطبيق جوال احترافي لـ iOS وAndroid مع لوحة تحكم</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold gradient-text">$799</span>
+                                <button onclick="showToast('تمت إضافة المنتج إلى السلة')" class="px-4 py-2 rounded-lg bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-24 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4 reveal">آراء عملائنا</h2>
+                    <p class="text-slate-400 reveal">ثقة بنيتها على نتائج ملموسة</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass-card rounded-2xl p-8 testimonial-card reveal">
+                        <div class="star-rating mb-4">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p class="text-slate-300 mb-6 leading-relaxed">"فريق Phi Platform قدم لنا حلاً تقنياً متكاملاً غيّر طريقة عملنا بالكامل. الجودة والسرعة في التنفيذ كانت مذهلة."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">أ</div>
+                            <div>
+                                <div class="font-bold">أحمد الشمري</div>
+                                <div class="text-sm text-slate-500">CEO - شركة التقنية المتقدمة</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-8 testimonial-card reveal">
+                        <div class="star-rating mb-4">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p class="text-slate-300 mb-6 leading-relaxed">"الدعم الفني المستمر والصيانة الدورية جعلتنا نركز على عملنا بدون قلق تقني. أفضل شريك تقني يمكن الاعتماد عليه."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-white font-bold">س</div>
+                            <div>
+                                <div class="font-bold">سارة العتيبي</div>
+                                <div class="text-sm text-slate-500">مديرة التسويق - مؤسسة النور</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-8 testimonial-card reveal">
+                        <div class="star-rating mb-4">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p class="text-slate-300 mb-6 leading-relaxed">"خدمات الأمن السيبراني أنقذت موقعنا من تهديد خطير. الاحترافية والسرعة في الاستجابة تجعلهم الأفضل في المجال."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white font-bold">م</div>
+                            <div>
+                                <div class="font-bold">محمد القحطاني</div>
+                                <div class="text-sm text-slate-500">CTO - منصة التجارة الإلكترونية</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="glass rounded-3xl p-12 text-center relative overflow-hidden reveal" style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(99, 102, 241, 0.2);">
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">جاهز لتحويل فكرتك إلى واقع؟</h2>
+                        <p class="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">انضم إلى مئات العملاء الذين يثقون بنا لبناء مستقبلهم الرقمي. ابدأ مشروعك اليوم واحصل على استشارة مجانية.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="navigateTo('request')" class="px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-xl hover:shadow-primary/30 transition-all liquid-btn">
+                                <i class="fas fa-paper-plane ml-2"></i>
+                                اطلب مشروعك الآن
+                            </button>
+                            <button onclick="showToast('سيتم التواصل معك قريباً')" class="px-8 py-4 rounded-xl border border-slate-600 text-slate-300 font-bold text-lg hover:border-primary hover:text-white transition-all">
+                                <i class="fas fa-phone ml-2"></i>
+                                تحدث مع خبير
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>

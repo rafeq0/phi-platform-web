@@ -1,0 +1,23 @@
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import path from 'node:path';
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { env } from './config/env.js';
+import { router } from './routes/index.js';
+import { errorHandler, notFound } from './middleware/error-handler.js';
+
+const app = express();
+app.disable('x-powered-by');
+app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+app.use(cors({ origin: env.corsOrigin, credentials: true }));
+app.use(express.json({ limit: '1mb' })); app.use(cookieParser());
+app.use('/api', rateLimit({ windowMs: 15*60*1000, limit: 300, standardHeaders: 'draft-7', legacyHeaders: false }), router);
+app.use('/uploads', express.static(path.resolve(env.uploadsDir), { fallthrough: false, maxAge: env.nodeEnv === 'production' ? '7d' : 0 }));
+const webDist = fileURLToPath(new URL('../../web/dist/', import.meta.url));
+if (env.nodeEnv === 'production' && fs.existsSync(webDist)) app.use(express.static(webDist));
+app.use(notFound); app.use(errorHandler);
+app.listen(env.port, () => console.log(`API listening on :${env.port}`));

@@ -1,0 +1,124 @@
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen" style="background: #020617;">
+        <div class="loading-logo">Phi</div>
+        <div class="loading-bar">
+            <div class="loading-bar-fill"></div>
+        </div>
+        <p class="mt-4 text-slate-400 text-sm">جاري تحميل المنصة...</p>
+    </div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Cursor Follower -->
+    <div class="cursor-follower hidden md:block" id="cursorFollower"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass" id="navbar" style="background: rgba(2, 6, 23, 0.98);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl glow">
+                        Φ
+                    </div>
+                    <span class="text-xl font-bold gradient-text">Phi Platform</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-8">
+                    <a onclick="navigateTo('home')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="home">الرئيسية</a>
+                    <a onclick="navigateTo('products')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="products">المنتجات</a>
+                    <a onclick="navigateTo('services')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="services">الخدمات</a>
+                    <a onclick="navigateTo('portfolio')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="portfolio">الأعمال</a>
+                    <a onclick="navigateTo('blog')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="blog">المدونة</a>
+                    <a onclick="navigateTo('support')" class="nav-link cursor-pointer text-slate-300 hover:text-white" data-page="support">الدعم</a>
+                </div>
+
+                <!-- Actions -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <button onclick="navigateTo('dashboard')" class="relative p-2 text-slate-300 hover:text-white transition-colors">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="notif-badge">3</span>
+                    </button>
+                    <button onclick="navigateTo('dashboard')" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all glow-hover">
+                        <i class="fas fa-user-circle ml-2"></i>
+                        لوحة العميل
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden p-2 text-slate-300" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-y-0 right-0 w-80 bg-darker border-l border-surface z-50 lg:hidden" id="mobileMenu" style="background: #020617;">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">
+                        Φ
+                    </div>
+                    <span class="text-xl font-bold gradient-text">Phi</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="p-2 text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-2">
+                <a onclick="navigateTo('home'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-home ml-3 w-6"></i>الرئيسية
+                </a>
+                <a onclick="navigateTo('products'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-shopping-bag ml-3 w-6"></i>المنتجات
+                </a>
+                <a onclick="navigateTo('services'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-cogs ml-3 w-6"></i>الخدمات
+                </a>
+                <a onclick="navigateTo('request'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-clipboard-list ml-3 w-6"></i>اطلب مشروع
+                </a>
+                <a onclick="navigateTo('portfolio'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-briefcase ml-3 w-6"></i>الأعمال السابقة
+                </a>
+                <a onclick="navigateTo('blog'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-blog ml-3 w-6"></i>المدونة
+                </a>
+                <a onclick="navigateTo('support'); toggleMobileMenu()" class="block p-4 rounded-xl hover:bg-surface text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-headset ml-3 w-6"></i>الدعم الفني
+                </a>
+                <a onclick="navigateTo('dashboard'); toggleMobileMenu()" class="block p-4 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 text-primary border border-primary/30">
+                    <i class="fas fa-th-large ml-3 w-6"></i>لوحة العميل
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle text-green-400 text-xl"></i>
+        <span id="toastMessage">تمت العملية بنجاح!</span>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="modal-content" id="modalContent">
+        <div class="text-center">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-rocket text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">ابدأ مشروعك الآن</h3>
+            <p class="text-slate-400 mb-6">سنقوم بتحليل متطلباتك وتقديم أفضل الحلول المناسبة لعملك</p>
+            <button onclick="closeModal(); navigateTo('request')" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all">
+                اطلب مشروع مخصص
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== HOME PAGE ==================== -->
+    
